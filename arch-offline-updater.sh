@@ -43,6 +43,12 @@
 # harddrive.  Then finish the arch installation. (bootloader,
 # update /etc/fstab to have the UUIDs, etc)
 #
+# (Side note, given that I split my "dd"ed image onto two DVDs, I needed
+# to "cat" them both to /dev/shm/ (which is just a RAM
+# based filesystem), because the filesystem in the
+# Arch installer live DVD did not have enough space
+# to put a 8GB image before "dd"ing it to the harddrive)
+#
 # Once the offline system is functional, you will want
 # to get updated packages over time.  That is what this
 # script does.
@@ -55,11 +61,13 @@
 # 2) The package metadata in /var/lib/pacman/sync and
 # 3) All of the packages in /var/cache/pacman/pkg.
 # Now burn the create directory to a DVD, and extract
-# on the offline system.
+# on the offline system using arch-update-apply.sh as root.
 #
 # This script also then deletes the contents of /var/cache/pacman/sync,
 # so that when you run the script again a month later, you
 # don't have to reburn packages which have already been transferred.
+#
+#
 
 
 
@@ -67,6 +75,7 @@
 # create directory into which the updates will go
 filename=sync$(date '+%Y-%m-%d-%H-%M-%S')
 mkdir $filename
+cp arch-update-apply.sh $filename/
 cd $filename
 
 # zip the appropriate files
