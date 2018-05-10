@@ -35,3 +35,5 @@ tar xvzf $TARBALLDIR/varcachepacmanpkg.tgz
 tar xvzf $TARBALLDIR/etcpacmand.tgz
 popd
 
+# do the update.  no "Y" flag because the package database is synced
+pacman -Suu
